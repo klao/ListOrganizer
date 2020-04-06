@@ -15,7 +15,7 @@
 // *** My Functions ***
 
 // updateActiveList()
-// fillAndDisplayList()
+// repopulateList()
 // initializeTabs()
 // initializeButtons()
 // addNewItem()
@@ -31,6 +31,7 @@
 //  All Clear Buttons       => in the initializeButtons function
 //  All Checkboxes          => in the updateCheckboxes function
 //  All Excl.marks          => in the updateCheckboxes function
+//  All Day circle          => in the repopulateList function
 
 // ===========================  //
 // ======*** My Code ***======  //
@@ -135,7 +136,7 @@ function initializeButtons() {
             // update the localStorage
             localStorage.setItem(activeListName, JSON.stringify(activeList));
             // repopulate the list in the HTML
-            fillAndDisplayList();
+            repopulateList();
         });
     }
 }
@@ -157,6 +158,10 @@ function addNewItem() {
             // set a default false value for high priority
             listObject.highPriority = false; 
         }
+        if (activeListName == 'menuPlanner') {
+            // set a default none value for day
+            listObject.day = 'none';
+        }
         console.log(listObject);
         console.log(activeList);
         // add the new list item to the active list array
@@ -164,7 +169,7 @@ function addNewItem() {
         // update the localstorage
         localStorage.setItem(activeListName, JSON.stringify(activeList));
         // repopulate the list in the HTML
-        fillAndDisplayList();
+        repopulateList();
     } else {
         // display error 
         console.log('You must write something to add');
@@ -183,7 +188,7 @@ function updateActiveList() {
         console.log('There is data in the LocalStorage for the active list');
         console.log('Active array contents:', activeList);
         // then present it on the page
-        fillAndDisplayList();
+        repopulateList();
     } else {
         // If no data in the storage - continue
         console.log('No data in the localStorage for the active list');
@@ -193,42 +198,55 @@ function updateActiveList() {
 
 // *** Function *** //
 // Populates the list in the HTML
-function fillAndDisplayList() {
+function repopulateList() {
     // Delete the current list ;
-    const list = document.querySelector('.activeWrapper .list');
-    list.innerHTML = '';
+    document.querySelectorAll('.activeWrapper .list').forEach(list => {
+        list.innerHTML = '';
+    });
+    let list = document.querySelector('.activeWrapper .list');
     // Create a new item in the list for every item in the activeList array
     activeList.forEach(item => {
         // we create a wrapper for the item
         const itemWrapper = document.createElement('div');
         itemWrapper.classList.add('itemWrapper');
         // each item will have a textbox and checkbox which we append to the itemwrapper
-        const condition = item.isItDone;
-        // (condition == false) we don't add a class
-        // (condition == true) we add the class 'done'
+        let exclamation = '';
+        if (activeListName == 'todoList') {
+            exclamation = '<i class="fas fa-exclamation"></i>';
+        }
         itemWrapper.innerHTML = `
-            <div class="itemText">${item.text}</div>
-            <div class="checkbox ${condition == true ? 'done': ''}"></div>
+            <div class="itemText ${item.highPriority == true ? 'priority': ''}">${exclamation}${item.text}</div>
+            <div class="checkbox ${item.isItDone == true ? 'done': ''}"></div>
             `;
-        if (activeListName == 'todoList') {    
-            itemWrapper.innerHTML = `
-            <div class="itemText"><i class="fas fa-exclamation"></i>${item.text}</div>
-            <div class="checkbox ${condition == true ? 'done': ''}"></div>
-            `;
-        } else if (activeListName == 'menuPlanner') {
+        if (activeListName == 'menuPlanner') {
             itemWrapper.innerHTML = `
             <div class="itemText">
                 <div class="weekSelection">
                     <i class="far fa-circle mon"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>
-                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle tue"></i>
+                    <i class="far fa-circle wed"></i>
+                    <i class="far fa-circle thu"></i>
+                    <i class="far fa-circle fri"></i>
+                    <i class="far fa-circle sat"></i>
+                    <i class="far fa-circle sun"></i>
                 </div>${item.text}</div>
-            <div class="checkbox ${condition == true ? 'done': ''}"></div>
+            <div class="checkbox ${item.isItDone == true ? 'done': ''}"></div>
             `;
+            let daycircles = itemWrapper.querySelectorAll('.weekSelection i');
+            daycircles.forEach(circle => {
+                circle.addEventListener('click', () => {
+                    const day = circle.classList[2];
+                    console.log('Some circle was clicked', day);
+                    const newParent = document.querySelector(`.activeWrapper .list.${day}`);
+                    const child = circle.parentElement.parentElement.parentElement;
+                    console.log('moving', child);
+                    console.log('new parent', newParent);
+                    newParent.appendChild(child);
+                    item.day = day;
+                    localStorage.setItem(activeListName, JSON.stringify(activeList));
+                });
+            });
+            list = document.querySelector(`.activeWrapper .list.${item.day}`);
         }
         list.appendChild(itemWrapper);
     });
@@ -274,17 +292,6 @@ function updateCheckBoxes () {
             }
             // update localStorage as well
             localStorage.setItem(activeListName, JSON.stringify(activeList));
-
-        });
-    });
-    let mondaycircles = document.querySelectorAll('.activeWrapper .weekSelection i.mon')
-    let monday = document.querySelector('.activeWrapper .week .monday'); 
-    console.log(monday);
-    console.log(mondaycircles);
-    mondaycircles.forEach((circle, i) => {
-        circle.addEventListener('click', () => {
-            console.log('Monday was clicked');
-            monday.after(circle.parentElement.parentElement.parentElement);
         });
     });
 }
@@ -295,7 +302,7 @@ function updateStrikethrough() {
     // get boxes
     let boxes = document.querySelectorAll('.activeWrapper .checkbox');
     boxes.forEach(box => {
-        if(box.classList.contains('done')){
+        if (box.classList.contains('done')) {
             // if the box contains the 'done' class
             // add the class 'marked' to the parent element to strike through the text
             box.parentElement.classList.add('marked');
