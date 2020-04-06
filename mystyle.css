@@ -130,6 +130,22 @@ main .itemText.priority i {
     color: black;
 }
 
+main .itemText .weekSelection {
+    /* background-color: #f0f0f0; */
+    height:  1.5rem;
+    width: 8.3rem;
+    margin-right: 2px;
+    display: inline-block;
+}
+main .itemText .weekSelection i {
+    height: 1rem;
+    width: 0.8rem;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
 .extras {
     display: flex;
     justify-content: center;
@@ -149,6 +165,20 @@ main .itemText.priority i {
 }
 .extras button img {
     margin-right: 0.4rem;
+}
+
+main .week {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.week .day {
+    width: 8.3rem;
+    text-align: center;
+    background-color: rgb(192, 192, 192);
+    font-size: 1.3rem;
+    padding: 0.3rem;
 }
 
 footer {

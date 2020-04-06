@@ -3,8 +3,8 @@
 // =========================  //
 
 
-// This is my code for the List Organizer Page
-// The first version was my Shopping List Page
+// This is my code for the List Organizer
+// The first version was my Shopping List
 
 
 // *** My variables ***
@@ -30,6 +30,7 @@
 //  All MarkAll Buttons     => in the initializeButtons function
 //  All Clear Buttons       => in the initializeButtons function
 //  All Checkboxes          => in the updateCheckboxes function
+//  All Excl.marks          => in the updateCheckboxes function
 
 // ===========================  //
 // ======*** My Code ***======  //
@@ -205,14 +206,27 @@ function fillAndDisplayList() {
         const condition = item.isItDone;
         // (condition == false) we don't add a class
         // (condition == true) we add the class 'done'
+        itemWrapper.innerHTML = `
+            <div class="itemText">${item.text}</div>
+            <div class="checkbox ${condition == true ? 'done': ''}"></div>
+            `;
         if (activeListName == 'todoList') {    
             itemWrapper.innerHTML = `
             <div class="itemText"><i class="fas fa-exclamation"></i>${item.text}</div>
             <div class="checkbox ${condition == true ? 'done': ''}"></div>
             `;
-        } else {
+        } else if (activeListName == 'menuPlanner') {
             itemWrapper.innerHTML = `
-            <div class="itemText">${item.text}</div>
+            <div class="itemText">
+                <div class="weekSelection">
+                    <i class="far fa-circle mon"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>
+                    <i class="far fa-circle"></i>
+                </div>${item.text}</div>
             <div class="checkbox ${condition == true ? 'done': ''}"></div>
             `;
         }
@@ -245,7 +259,7 @@ function updateCheckBoxes () {
             updateStrikethrough();
         });
     });
-    let exclamationMarks = document.querySelectorAll('.activeWrapper .itemText i');
+    let exclamationMarks = document.querySelectorAll('.activeWrapper .itemText i.fas');
     exclamationMarks.forEach((mark, i) => {
         // If an exclamation mark for priority is clicked 
         // update the information of the list and storage too and display it in the page
@@ -261,6 +275,16 @@ function updateCheckBoxes () {
             // update localStorage as well
             localStorage.setItem(activeListName, JSON.stringify(activeList));
 
+        });
+    });
+    let mondaycircles = document.querySelectorAll('.activeWrapper .weekSelection i.mon')
+    let monday = document.querySelector('.activeWrapper .week .monday'); 
+    console.log(monday);
+    console.log(mondaycircles);
+    mondaycircles.forEach((circle, i) => {
+        circle.addEventListener('click', () => {
+            console.log('Monday was clicked');
+            monday.after(circle.parentElement.parentElement.parentElement);
         });
     });
 }
