@@ -205,10 +205,17 @@ function fillAndDisplayList() {
         const condition = item.isItDone;
         // (condition == false) we don't add a class
         // (condition == true) we add the class 'done'
-        itemWrapper.innerHTML = `
+        if (activeListName == 'todoList') {    
+            itemWrapper.innerHTML = `
             <div class="itemText"><i class="fas fa-exclamation"></i>${item.text}</div>
             <div class="checkbox ${condition == true ? 'done': ''}"></div>
             `;
+        } else {
+            itemWrapper.innerHTML = `
+            <div class="itemText">${item.text}</div>
+            <div class="checkbox ${condition == true ? 'done': ''}"></div>
+            `;
+        }
         list.appendChild(itemWrapper);
     });
     // we want our query selector to select the newly created checkboxes too

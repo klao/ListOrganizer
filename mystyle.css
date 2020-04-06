@@ -121,6 +121,7 @@ main .itemText i {
     width: 1rem;
     color: white;
     cursor: pointer;
+    user-select: none;
 }
 main .itemText.priority {
     font-weight: bold;
