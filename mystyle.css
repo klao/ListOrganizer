@@ -103,14 +103,14 @@ div .itemWrapper.marked {
 }
 
 main .checkbox {
-    background: url(images/check-square.svg);
+    background: url(images/square.svg);
     background-repeat: no-repeat;
     height:  1.5rem;
     width: 1.5rem;
 }
   
-main .checkbox.notdoneyet {
-    background: url(images/square.svg);
+main .checkbox.done {
+    background: url(images/check-square.svg);
     background-repeat: no-repeat;
     height:  1.5rem;
     width: 1.5rem;

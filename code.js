@@ -113,7 +113,7 @@ function initializeButtons() {
             e.preventDefault();
             let boxes = document.querySelectorAll('.activeWrapper .checkbox');
             boxes.forEach((box, i) => {
-                box.classList.remove('notdoneyet');
+                box.classList.add('done');
                 // update activeList
                 activeList[i].isItDone = true;
                 // update the localStorage
@@ -198,11 +198,11 @@ function fillAndDisplayList() {
         itemWrapper.classList.add('itemWrapper');
         // each item will have a textbox and checkbox which we append to the itemwrapper
         const condition = item.isItDone;
-        // (condition == false) we add a class
-        // (condition == true) we don"t add an additional class
+        // (condition == false) we don't add a class
+        // (condition == true) we add the class 'done'
         itemWrapper.innerHTML = `
             <div class="itemText">${item.text}</div>
-            <div class="checkbox ${condition == false ? 'notdoneyet': ''}"></div>
+            <div class="checkbox ${condition == true ? 'done': ''}"></div>
             `;
         list.appendChild(itemWrapper);
     });
@@ -219,13 +219,13 @@ function updateCheckBoxes () {
     boxes.forEach((box, i) => {
         // If a checkbox is clicked, update the information of the list and storage too and display it in the page
         box.addEventListener('click', e => {
-            // toggle the notdoneyet class
-            box.classList.toggle('notdoneyet');
+            // toggle the 'done' class
+            box.classList.toggle('done');
             // update the activeList array
-            if (box.classList.contains('notdoneyet')) {
-                activeList[i].isItDone = false;
-            } else {
+            if (box.classList.contains('done')) {
                 activeList[i].isItDone = true;
+            } else {
+                activeList[i].isItDone = false;
             }
             // update localStorage as well
             localStorage.setItem(activeListName, JSON.stringify(activeList));
@@ -241,12 +241,12 @@ function updateStrikethrough() {
     // get boxes
     let boxes = document.querySelectorAll('.activeWrapper .checkbox');
     boxes.forEach(box => {
-        if(!box.classList.contains('notdoneyet')){
-            // if the box doesn't contain the 'notdoneyet' class
+        if(box.classList.contains('done')){
+            // if the box contains the 'done' class
             // add the class 'marked' to the parent element to strike through the text
             box.parentElement.classList.add('marked');
-        } else if (box.classList.contains('notdoneyet')) {
-            // if the box contains the 'notdoneyet' class
+        } else if (!box.classList.contains('done')) {
+            // if the box doesn't contains the 'done' class
             // add the remove 'marked' to the parent element to not to be striked through
             box.parentElement.classList.remove('marked');
         }
