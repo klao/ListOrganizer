@@ -151,6 +151,11 @@ function addNewItem() {
             text : newestListItem,
             isItDone : false
         };
+        // if todoList active
+        if (activeListName == 'todoList') {
+            // set a default false value for high priority
+            listObject.highPriority = false; 
+        }
         console.log(listObject);
         console.log(activeList);
         // add the new list item to the active list array
@@ -201,7 +206,7 @@ function fillAndDisplayList() {
         // (condition == false) we don't add a class
         // (condition == true) we add the class 'done'
         itemWrapper.innerHTML = `
-            <div class="itemText">${item.text}</div>
+            <div class="itemText"><i class="fas fa-exclamation"></i>${item.text}</div>
             <div class="checkbox ${condition == true ? 'done': ''}"></div>
             `;
         list.appendChild(itemWrapper);
@@ -218,7 +223,7 @@ function updateCheckBoxes () {
     let boxes = document.querySelectorAll('.activeWrapper .checkbox');
     boxes.forEach((box, i) => {
         // If a checkbox is clicked, update the information of the list and storage too and display it in the page
-        box.addEventListener('click', e => {
+        box.addEventListener('click', () => {
             // toggle the 'done' class
             box.classList.toggle('done');
             // update the activeList array
@@ -231,6 +236,24 @@ function updateCheckBoxes () {
             localStorage.setItem(activeListName, JSON.stringify(activeList));
             // update the style and display
             updateStrikethrough();
+        });
+    });
+    let exclamationMarks = document.querySelectorAll('.activeWrapper .itemText i');
+    exclamationMarks.forEach((mark, i) => {
+        // If an exclamation mark for priority is clicked 
+        // update the information of the list and storage too and display it in the page
+        mark.addEventListener('click', () => {
+            // toggle the priority class on the parent: div.itemText
+            mark.parentElement.classList.toggle('priority')
+            // update the activeList array
+            if (mark.parentElement.classList.contains('priority')) {
+                activeList[i].highPriority = true;
+            } else {
+                activeList[i].highPriority = false;
+            }
+            // update localStorage as well
+            localStorage.setItem(activeListName, JSON.stringify(activeList));
+
         });
     });
 }

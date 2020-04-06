@@ -115,6 +115,20 @@ main .checkbox.done {
     height:  1.5rem;
     width: 1.5rem;
 }
+
+main .itemText i {
+    height:  1.5rem;
+    width: 1rem;
+    color: white;
+    cursor: pointer;
+}
+main .itemText.priority {
+    font-weight: bold;
+}
+main .itemText.priority i {
+    color: black;
+}
+
 .extras {
     display: flex;
     justify-content: center;
