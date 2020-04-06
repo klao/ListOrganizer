@@ -1,0 +1,147 @@
+/* === Small CSS Reset === */
+* {
+    margin: 0;
+    padding: 0;
+}
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+/* == My List Organizer == */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f0f0f0;
+    color: black;
+}
+
+h1 {
+    margin: 1rem 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 3rem;
+}
+  
+form {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+}
+  
+form input {
+    width: 100%;
+}
+  
+input, button {
+    font-size: 1.5rem;
+    padding: 0.4rem;
+    margin: 0 0.2rem;
+    color: black;
+    background-color: white;
+    border: solid 1px black;
+}
+
+main .menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+main .menu li {
+    list-style: none;
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    padding-bottom: 1.2rem;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+}
+
+main .menu li.activeTab {
+    z-index: 100;
+}
+main .listWrapper {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+main .list {
+    width: 100%;
+}
+
+main .itemWrapper { 
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.2);
+    align-self: flex-start;
+    font-size: 1.3rem;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .itemWrapper:nth-child(odd) { 
+    background: rgba(170, 170, 170, 0.2);
+}
+div .itemWrapper.marked {
+    text-decoration: line-through;
+}
+
+main .checkbox {
+    background: url(images/check-square.svg);
+    background-repeat: no-repeat;
+    height:  1.5rem;
+    width: 1.5rem;
+}
+  
+main .checkbox.notdoneyet {
+    background: url(images/square.svg);
+    background-repeat: no-repeat;
+    height:  1.5rem;
+    width: 1.5rem;
+}
+.extras {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    display: flex;
+}
+.extras button {
+    border:none;
+    color: black;
+    background-color: white;
+    border: solid 1px black;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+}
+.extras button img {
+    margin-right: 0.4rem;
+}
+
+footer {
+    padding: 0 0.5rem;
+    position: fixed;
+    bottom: 0.5rem;
+}
+
+.hidden {
+    display: none;
+}

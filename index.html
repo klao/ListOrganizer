@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Organizer</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <header>
+        <h1>My List Organizer</h1>
+    </header>
+    <main>
+        <form>
+            <label for="item-to-add"></label>
+            <input type="text" name="item-to-add" id="item-to-add">
+            <button id="add-button" for="item-to-add">Add</button>
+        </form>
+        <ul class="menu">
+            <li id="shoppingList" class="activeTab">Shopping List</li>
+            <li id="menuPlanner">Menu Planner</li>
+            <li id="todoList">Todo List</li>
+            <li id="cleaning">Cleaning Plan</li>
+        </ul>
+        <div class="listWrapper shop activeWrapper">
+            <div class="list"></div>
+            <div class="extras">
+                <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
+                <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
+            </div>
+        </div>
+        <div class="listWrapper menup hidden">
+            <div class="list"></div>
+            <div class="extras">
+                <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
+                <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
+            </div>
+        </div>
+        <div class="listWrapper todo hidden">
+            <div class="list"></div>
+            <div class="extras">
+                <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
+                <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
+            </div>
+        </div>
+        <div class="listWrapper clean hidden">
+            <div class="list"></div>
+            <div class="extras">
+                <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
+                <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <small>Made with ❤️ and coffee!</small>
+      </footer>
+    <script src="code.js"></script>
+</body>
+</html>
