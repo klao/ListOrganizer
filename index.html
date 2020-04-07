@@ -18,19 +18,19 @@
             <button id="add-button" for="item-to-add">Add</button>
         </form>
         <ul class="menu">
-            <li id="shoppingList" class="activeTab">Shopping List</li>
-            <li id="menuPlanner">Menu Planner</li>
-            <li id="todoList">Todo List</li>
-            <li id="cleaning">Cleaning Plan</li>
+            <li id="shoppingList-tab" class="activeTab">Shopping List</li>
+            <li id="menuPlanner-tab">Menu Planner</li>
+            <li id="todoList-tab">Todo List</li>
+            <li id="cleaning-tab">Cleaning Plan</li>
         </ul>
-        <div class="listWrapper shop activeWrapper">
+        <div id="shoppingList-list" class="listWrapper shop activeWrapper">
             <div class="list"></div>
             <div class="extras">
                 <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
                 <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
             </div>
         </div>
-        <div class="listWrapper menup hidden">
+        <div id="menuPlanner-list" class="listWrapper menup hidden">
             <div class="list none"></div>
             <div class="week">
                 <div class="day">Monday</div>
@@ -53,14 +53,14 @@
                 <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
             </div>
         </div>
-        <div class="listWrapper todo hidden">
+        <div id="todoList-list" class="listWrapper todo hidden">
             <div class="list"></div>
             <div class="extras">
                 <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
                 <button class="clearCompleted"><img src="images/trash-2.svg" alt="A trash can">Clear completed</button>
             </div>
         </div>
-        <div class="listWrapper clean hidden">
+        <div id="cleaning-list" class="listWrapper clean hidden">
             <div class="list"></div>
             <div class="extras">
                 <button class="markAllCompleted"><img src="images/check-circle.svg" alt="A check mark in a circle">Mark all as completed</button>
